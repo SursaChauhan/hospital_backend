@@ -3,6 +3,7 @@ const dotenv =require('dotenv');
 const cors =require('cors');
 const AuthRoute =require('./route/authRoutes.js');
 const {  mongoose } = require('mongoose');
+const { swaggerUi, swaggerSpec } = require('./swagger.js');
 dotenv.config();
 
 const app =express();
@@ -16,8 +17,13 @@ app.get('/',(req,res)=>{
     res.send("Api is running...")
 })
 app.use('/api',AuthRoute);
-mongoose.connect(process.env.MONGO_URL)
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+mongoose.connect(process.env.MONGO_URL);
+
 const connectDB = mongoose.connection;
+
 connectDB.on('error', console.error.bind(console, 'MongoDB connection error:'));
 connectDB.once('open', () => {
     console.log('MongoDB connected successfully!');

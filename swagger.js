@@ -6,7 +6,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'PMS',
+    title: 'Hospital_backend',
     version: '1.0.0',
     description: 'API Documentation',
   },
@@ -23,6 +23,8 @@ const options = {
   // Path to the API docs
   apis: ['./route/*.js'], // files containing annotations for the OpenAPI Specification
 };
+
+// ./route/*.js
 
 // Initialize swagger-jsdoc
 const swaggerSpec = swaggerJSDoc(options);
